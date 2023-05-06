@@ -1,0 +1,101 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+def IP(x):
+    IP = 0.73 * (x - 20)
+    return IP
+
+def LLH(x):
+    LLH = x/0.73 + 20
+    return LLH
+
+
+def LLH2(x):
+    LLH2 = x/0.9 + 8
+    return LLH2
+
+def LLHI(x):
+    LLHI = x/0.73 + 20
+    return LLHI
+
+def LLHI1(x):
+    LLHI1 = x/0.9 + 8
+    return LLHI1
+
+def LLU(x):
+    LLU = 0.9*(x-8)
+    return LLU
+
+def cartaplasticidad():
+    #Línea vertical
+    lineaV = np.array([57,0])
+    lineaV1 = np.array([50,50])
+    plt.plot(lineaV1, lineaV, "b" , label = "")
+    #Línea A
+    LLmax = 100
+    LLmin = 20
+    
+    IPmax = IP(LLmax)
+    IPmin = IP(LLmin)
+
+    lineaA = np.array([IPmin,IPmax])
+    lineaA1 = np.array([LLmin,LLmax])
+    plt.plot(lineaA1, lineaA, "grey" , label = "línea A")
+   #Línea límite horizontal superior
+    IPH = 7
+    LLHmax = LLH(IPH)
+    LLHmin = LLH2(IPH)
+    lineaH = np.array([IPH,IPH])
+    lineaH1 = np.array([LLHmin,LLHmax])
+    plt.plot(lineaH1, lineaH, "red" , label = "")
+
+
+    #Línea límite horizontal inferior
+
+    IPHI = 4
+
+
+    LLHImax = LLHI(IPHI)
+    LLHImin = LLHI1(IPHI)
+    lineaH = np.array([IPHI,IPHI])
+    lineaH1 = np.array([LLHImin,LLHImax])
+    plt.plot(lineaH1, lineaH, "y" , label = "")
+
+
+#Línea límite U
+
+    LLUmax = 73
+    LLUmin = 8
+
+
+    LLU1 = LLU(LLUmax)
+    LLU2 = LLU(LLUmin)
+
+    lineaU = np.array([LLU1,LLU2])
+    lineaU1 = np.array([LLUmax,LLUmin])
+    plt.plot(lineaU1, lineaU, "m" , ls='dashdot', label = "línea U")
+
+    # Gráfico
+
+    plt.text(20, 40, "NO EXISTE", fontsize=8, fontweight='bold')
+    plt.text(40, 20, "CL", fontsize=8, fontweight='bold')
+    plt.text(18, 4.8, "CL-ML", fontsize=8, fontweight='bold')
+    plt.text(65, 40, "CH", fontsize=8, fontweight='bold')
+    plt.text(40, 5, "ML", fontsize=8, fontweight='bold')
+    plt.text(65, 5, "MH", fontsize=8, fontweight='bold')
+    plt.text(80, 40, "Línea A", fontsize=8, fontweight='bold', rotation=37)
+    plt.text(65, 48, "Línea U", fontsize=8, fontweight='bold', rotation=41)
+
+    LL=float(input("escriba LL: "))
+    IP=float(input("escriba IP: "))
+
+
+    plt.title("CARTA DE PLASTICIDAD", fontsize=10)
+    plt.xlabel("LIMITE LIQUIDO", fontsize=10)
+    plt.ylabel("INDICE DE PLASTICIDAD", fontsize=10)
+    plt.scatter( LL,IP, lw =4, alpha = 0.5 )
+    plt.legend()
+    plt.grid(color="grey", ls = "dashdot", lw =1, alpha = 0.5)
+    plt.show()
+
+cartaplasticidad()
